@@ -1,6 +1,7 @@
 package com.aditapillai.projects.tameofthrones.models;
 
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
+import com.aditapillai.projects.tameofthrones.utils.IOUtils;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,14 +20,10 @@ public class Universe {
     public static Universe getInstance() {
         if (universe == null) {
             synchronized (Universe.class) {
-                Universe.universe = new Universe(initializeKingdoms());
+                Universe.universe = new Universe(new HashSet<>(IOUtils.getAllKingdoms()));
             }
         }
         return universe;
-    }
-
-    private static Set<Kingdom> initializeKingdoms() {
-        return null;
     }
 
     public Kingdom getRulingKingdom() {

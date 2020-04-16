@@ -1,0 +1,7 @@
+King Shan,M,SPACE
+Queen A,F,LAND
+King B,M,SPACE
+King G,M,WATER
+Queen X,F,ICE
+King L,M,AIR
+Queen D,F,FIRE
