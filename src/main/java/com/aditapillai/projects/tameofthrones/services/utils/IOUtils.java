@@ -1,8 +1,9 @@
-package com.aditapillai.projects.tameofthrones.utils;
+package com.aditapillai.projects.tameofthrones.services.utils;
 
 import com.aditapillai.projects.tameofthrones.models.Gender;
 import com.aditapillai.projects.tameofthrones.models.Kingdom;
 import com.aditapillai.projects.tameofthrones.models.Ruler;
+import com.aditapillai.projects.tameofthrones.services.PostService;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -33,11 +34,14 @@ public class IOUtils {
                           .getResourceAsStream("init/kingdoms.txt");
 
         reader = new BufferedReader(new InputStreamReader(in));
-        return reader.lines()
-                     .map(line -> line.split(","))
-                     .map(split -> new Kingdom(split[1], split[0]))
-                     .peek(kingdom -> kingdom.setRuler(kingdomRulerMap.get(kingdom.name)))
-                     .collect(Collectors.toList());
+        List<Kingdom> kingdoms = reader.lines()
+                                       .map(line -> line.split(","))
+                                       .map(split -> new Kingdom(split[1], split[0]))
+                                       .peek(kingdom -> kingdom.setRuler(kingdomRulerMap.get(kingdom.name)))
+                                       .collect(Collectors.toList());
+        PostService postService = new PostService(kingdoms);
+        kingdoms.forEach(kingdom -> kingdom.setPostService(postService));
+        return kingdoms;
 
     }
 }

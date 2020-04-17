@@ -1,7 +1,7 @@
 package com.aditapillai.projects.tameofthrones.models;
 
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
-import com.aditapillai.projects.tameofthrones.utils.IOUtils;
+import com.aditapillai.projects.tameofthrones.services.utils.IOUtils;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -36,7 +36,13 @@ public class Universe {
     }
 
     public Set<Kingdom> getKingdoms() {
-        return new HashSet<>(this.kingdoms);
+        return this.kingdoms;
     }
 
+    public Kingdom getKingdom(String name) {
+        return this.kingdoms.stream()
+                            .filter(kingdom -> kingdom.name.equals(name))
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException(String.format("Kingdom with name %s not found", name)));
+    }
 }

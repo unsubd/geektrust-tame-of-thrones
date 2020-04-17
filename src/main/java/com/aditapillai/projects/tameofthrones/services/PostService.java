@@ -1,17 +1,27 @@
 package com.aditapillai.projects.tameofthrones.services;
 
+import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.models.Kingdom;
 import com.aditapillai.projects.tameofthrones.models.Message;
 
-public class PostService {
-    private AddressRegistry addressRegistry;
+import java.util.Collection;
+import java.util.Objects;
 
-    public PostService(AddressRegistry addressRegistry) {
-        this.addressRegistry = addressRegistry;
+public class PostService {
+    private final AddressRegistry addressRegistry;
+
+    public PostService(@NotNull Collection<Kingdom> kingdoms) {
+        Objects.requireNonNull(kingdoms, "Kingdoms should not be null");
+        this.addressRegistry = new AddressRegistry(kingdoms);
     }
 
     public Message exchange(Message message) {
         Kingdom to = this.addressRegistry.getKingdomFromAddress(message.to);
-        return to.exchangeMessage(message);
+        return to.inbox(message);
     }
+
+    public String getEmblemFor(String name) {
+        return this.addressRegistry.getKingdomFromAddress(name).emblem;
+    }
+
 }
