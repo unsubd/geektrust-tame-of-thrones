@@ -32,12 +32,12 @@ public class Kingdom {
     public void sendMessage(String to, String body) {
         Message message = new Message(this.name, to, body);
         Message response = this.postService.exchange(message);
-        if (this.hasAllied(response)) {
+        if (this.hasOtherKingdomAllied(response)) {
             this.allies.add(response.from);
         }
     }
 
-    private boolean hasAllied(Message message) {
+    private boolean hasOtherKingdomAllied(Message message) {
         try {
             Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.postService.getEmblemFor(message.from)
                                                                                        .length());
