@@ -1,8 +1,8 @@
 package com.aditapillai.projects.tameofthrones.services;
 
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
-import com.aditapillai.projects.tameofthrones.models.Kingdom;
 import com.aditapillai.projects.tameofthrones.models.Message;
+import com.aditapillai.projects.tameofthrones.universe.Kingdom;
 
 import java.util.Collection;
 import java.util.Objects;

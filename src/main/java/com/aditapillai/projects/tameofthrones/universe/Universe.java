@@ -1,4 +1,4 @@
-package com.aditapillai.projects.tameofthrones.models;
+package com.aditapillai.projects.tameofthrones.universe;
 
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.services.utils.IOUtils;

@@ -1,9 +1,9 @@
 package com.aditapillai.projects.tameofthrones.services.utils;
 
 import com.aditapillai.projects.tameofthrones.models.Gender;
-import com.aditapillai.projects.tameofthrones.models.Kingdom;
 import com.aditapillai.projects.tameofthrones.models.Ruler;
 import com.aditapillai.projects.tameofthrones.services.PostService;
+import com.aditapillai.projects.tameofthrones.universe.Kingdom;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -1,6 +1,6 @@
 package com.aditapillai.projects.tameofthrones.services;
 
-import com.aditapillai.projects.tameofthrones.models.Kingdom;
+import com.aditapillai.projects.tameofthrones.universe.Kingdom;
 
 import java.util.Collection;
 import java.util.Map;

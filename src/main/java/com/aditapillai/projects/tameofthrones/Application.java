@@ -1,8 +1,8 @@
 package com.aditapillai.projects.tameofthrones;
 
-import com.aditapillai.projects.tameofthrones.models.Kingdom;
 import com.aditapillai.projects.tameofthrones.models.Pair;
-import com.aditapillai.projects.tameofthrones.models.Universe;
+import com.aditapillai.projects.tameofthrones.universe.Kingdom;
+import com.aditapillai.projects.tameofthrones.universe.Universe;
 
 import java.io.IOException;
 import java.nio.file.Files;
