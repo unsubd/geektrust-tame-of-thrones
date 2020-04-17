@@ -17,7 +17,7 @@ public class PostService {
 
     public Message exchange(Message message) {
         Kingdom to = this.addressRegistry.getKingdomFromAddress(message.to);
-        return to.inbox(message);
+        return to.allyRequest(message);
     }
 
     public String getEmblemFor(String name) {

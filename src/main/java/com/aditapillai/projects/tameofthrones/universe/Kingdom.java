@@ -49,7 +49,15 @@ public class Kingdom {
         return Objects.hash(emblem);
     }
 
-    public boolean hasAllied(Message message) {
+    public void sendMessage(String to, String body) {
+        Message message = new Message(this.name, to, body);
+        Message response = this.postService.exchange(message);
+        if (this.hasAllied(response)) {
+            this.allies.add(response.from);
+        }
+    }
+
+    private boolean hasAllied(Message message) {
         try {
             Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.postService.getEmblemFor(message.from)
                                                                                        .length());
@@ -60,15 +68,7 @@ public class Kingdom {
         }
     }
 
-    public void sendMessage(String to, String body) {
-        Message message = new Message(this.name, to, body);
-        Message response = this.postService.exchange(message);
-        if (this.hasAllied(response)) {
-            this.allies.add(response.from);
-        }
-    }
-
-    public Message inbox(Message message) {
+    public Message allyRequest(Message message) {
         Message response;
         try {
             Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.emblem.length());
