@@ -7,11 +7,11 @@ class CharacterWheel {
     private static CharacterWheel characterWheel;
     private final Node first;
 
-    private CharacterWheel(int lower, int upper) {
-        this.first = new Node((char) lower);
+    private CharacterWheel(char lower, char upper) {
+        this.first = new Node(lower);
         Node node = this.first;
-        for (int i = lower + 1; i <= upper; i++) {
-            Node next = new Node((char) i);
+        for (char i = (char) (lower + 1); i <= upper; i++) {
+            Node next = new Node(i);
             next.prev = node;
             node.next = next;
             node = node.next;
