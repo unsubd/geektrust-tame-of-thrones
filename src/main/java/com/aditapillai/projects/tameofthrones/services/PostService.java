@@ -1,5 +1,6 @@
 package com.aditapillai.projects.tameofthrones.services;
 
+import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.models.Message;
 import com.aditapillai.projects.tameofthrones.universe.Kingdom;
@@ -11,7 +12,7 @@ public class PostService {
     private final AddressRegistry addressRegistry;
 
     public PostService(@NotNull Collection<Kingdom> kingdoms) {
-        Objects.requireNonNull(kingdoms, "Kingdoms should not be null");
+        Objects.requireNonNull(kingdoms, ErrorMessages.KINGDOMS_NOT_NULL_ERROR_MESSAGE);
         this.addressRegistry = new AddressRegistry(kingdoms);
     }
 

@@ -1,5 +1,6 @@
 package com.aditapillai.projects.tameofthrones.universe;
 
+import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.services.utils.IOUtils;
 
@@ -31,7 +32,7 @@ public class Universe {
     }
 
     public void setRulingKingdom(@NotNull Kingdom kingdom) {
-        Objects.requireNonNull(kingdom, "The ruling kingdom cannot be set to a null value");
+        Objects.requireNonNull(kingdom, ErrorMessages.RULING_KINGDOM_NOT_NULL_ERROR_MESSAGE);
         this.rulingKingdom = kingdom;
     }
 
@@ -43,6 +44,6 @@ public class Universe {
         return this.kingdoms.stream()
                             .filter(kingdom -> kingdom.name.equals(name))
                             .findFirst()
-                            .orElseThrow(() -> new RuntimeException(String.format("Kingdom with name %s not found", name)));
+                            .orElseThrow(() -> new RuntimeException(String.format(ErrorMessages.KINGDOM_NOT_FOUND_ERROR_MESSAGE_FORMAT, name)));
     }
 }

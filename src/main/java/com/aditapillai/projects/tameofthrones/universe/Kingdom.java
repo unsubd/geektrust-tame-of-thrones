@@ -2,10 +2,12 @@ package com.aditapillai.projects.tameofthrones.universe;
 
 import com.aditapillai.projects.tameofthrones.cipher.Cipher;
 import com.aditapillai.projects.tameofthrones.cipher.Ciphers;
+import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.models.Message;
 import com.aditapillai.projects.tameofthrones.models.Ruler;
 import com.aditapillai.projects.tameofthrones.services.PostService;
+import com.aditapillai.projects.tameofthrones.universe.constants.MessageResponses;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -20,8 +22,8 @@ public class Kingdom {
     private PostService postService;
 
     public Kingdom(@NotNull String emblem, @NotNull String name) {
-        Objects.requireNonNull(emblem, "Emblem for a kingdom cannot be null");
-        Objects.requireNonNull(name, "Name of a kingdom cannot be null");
+        Objects.requireNonNull(emblem, ErrorMessages.EMBLEM_NOT_NULL_ERROR_MESSAGE);
+        Objects.requireNonNull(name, ErrorMessages.NAME_NOT_NULL_ERROR_MESSAGE);
         this.emblem = emblem;
         this.name = name;
         this.allies = new LinkedList<>();
@@ -40,7 +42,7 @@ public class Kingdom {
             Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.postService.getEmblemFor(message.from)
                                                                                        .length());
             String decryptedMessage = cipher.decrypt(message.body);
-            return "YES".equalsIgnoreCase(decryptedMessage);
+            return MessageResponses.POSITIVE_RESPONSE.equalsIgnoreCase(decryptedMessage);
         } catch (NoSuchAlgorithmException e) {
             return false;
         }
@@ -51,11 +53,12 @@ public class Kingdom {
         try {
             Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.emblem.length());
             String decryptedMessage = cipher.decrypt(message.body);
-            String shouldWeAlly = this.shouldWeAlly(decryptedMessage) ? "YES": "NO";
+            String shouldWeAlly = this.shouldWeAlly(decryptedMessage) ? MessageResponses.POSITIVE_RESPONSE:
+                    MessageResponses.NEGATIVE_RESPONSE;
             String responseBody = cipher.encrypt(shouldWeAlly);
             response = new Message(this.name, message.from, responseBody);
         } catch (NoSuchAlgorithmException e) {
-            return new Message(this.name, message.from, "NO");
+            return new Message(this.name, message.from, MessageResponses.NEGATIVE_RESPONSE);
         }
 
         return response;
