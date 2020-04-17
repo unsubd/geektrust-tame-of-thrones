@@ -1,6 +1,8 @@
 package com.aditapillai.projects.tameofthrones.cipher;
 
 
+import com.aditapillai.projects.tameofthrones.cipher.constants.CipherConstants;
+
 class CharacterWheel {
     private static CharacterWheel characterWheel;
     private final Node first;
@@ -21,7 +23,7 @@ class CharacterWheel {
     static CharacterWheel getInstance() {
         if (characterWheel == null) {
             synchronized (CharacterWheel.class) {
-                characterWheel = new CharacterWheel(65, 90);
+                characterWheel = new CharacterWheel(CipherConstants.CHARACTER_LOWER_BOUND, CipherConstants.CHARACTER_UPPER_BOUND);
             }
         }
         return characterWheel;
