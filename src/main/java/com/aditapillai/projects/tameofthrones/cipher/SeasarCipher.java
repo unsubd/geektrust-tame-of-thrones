@@ -11,19 +11,20 @@ class SeasarCipher implements Cipher {
 
     @Override
     public String encrypt(String data) {
-        char[] chars = data.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            chars[i] = CHAR_WHEEL.moveClockWise(chars[i], key);
-        }
-        return new String(chars);
+        return data.chars()
+                   .mapToObj(character -> (char) character)
+                   .map(character -> CHAR_WHEEL.moveClockWise(character, this.key))
+                   .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                   .toString();
     }
 
     @Override
     public String decrypt(String data) {
-        char[] chars = data.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            chars[i] = CHAR_WHEEL.moveAntiClockwise(chars[i], key);
-        }
-        return new String(chars);
+        return data.chars()
+                   .mapToObj(character -> (char) character)
+                   .map(character -> CHAR_WHEEL.moveAntiClockwise(character, this.key))
+                   .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                   .toString();
+
     }
 }
