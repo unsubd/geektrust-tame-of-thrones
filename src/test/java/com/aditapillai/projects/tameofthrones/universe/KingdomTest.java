@@ -43,6 +43,15 @@ class KingdomTest {
     }
 
     @Test
+    void sendMessageNegativeTest() throws NoSuchAlgorithmException {
+        Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, "OWL".length());
+        String encryptedBody = cipher.encrypt("BADVALUE");
+        land.sendMessage("AIR", encryptedBody);
+        Assertions.assertTrue(land.getAllies()
+                                  .isEmpty());
+    }
+
+    @Test
     void allyRequest() throws NoSuchAlgorithmException {
         Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, "PANDA".length());
         String message = cipher.encrypt("ALLYMEPANDA");
@@ -60,5 +69,12 @@ class KingdomTest {
         Assertions.assertTrue(this.land.getAllies()
                                        .isEmpty());
     }
+
+    @Test
+    void getRuler() {
+        Assertions.assertNotNull(this.land.getRuler());
+        Assertions.assertEquals("King 1", this.land.getRuler().name);
+    }
+
 
 }
