@@ -51,8 +51,8 @@ public class Kingdom {
 
     public boolean hasAllied(Message message) {
         try {
-            Cipher cipher = Ciphers.cipher("seasar", this.postService.getEmblemFor(message.from)
-                                                                     .length());
+            Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.postService.getEmblemFor(message.from)
+                                                                                       .length());
             String decryptedMessage = cipher.decrypt(message.body);
             return "YES".equalsIgnoreCase(decryptedMessage);
         } catch (NoSuchAlgorithmException e) {
@@ -71,7 +71,7 @@ public class Kingdom {
     public Message inbox(Message message) {
         Message response;
         try {
-            Cipher cipher = Ciphers.cipher("seasar", this.emblem.length());
+            Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.emblem.length());
             String decryptedMessage = cipher.decrypt(message.body);
             String shouldWeAlly = this.shouldWeAlly(decryptedMessage) ? "YES": "NO";
             String responseBody = cipher.encrypt(shouldWeAlly);

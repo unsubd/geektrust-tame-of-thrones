@@ -1,11 +1,11 @@
 package com.aditapillai.projects.tameofthrones.cipher;
 
 
-class CharWheel {
-    private static CharWheel charWheel;
+class CharacterWheel {
+    private static CharacterWheel characterWheel;
     private final Node first;
 
-    private CharWheel(int lower, int upper) {
+    private CharacterWheel(int lower, int upper) {
         this.first = new Node((char) lower);
         Node node = this.first;
         for (int i = lower + 1; i <= upper; i++) {
@@ -18,16 +18,16 @@ class CharWheel {
         this.first.prev = node;
     }
 
-    static CharWheel getInstance() {
-        if (charWheel == null) {
-            synchronized (CharWheel.class) {
-                charWheel = new CharWheel(65, 90);
+    static CharacterWheel getInstance() {
+        if (characterWheel == null) {
+            synchronized (CharacterWheel.class) {
+                characterWheel = new CharacterWheel(65, 90);
             }
         }
-        return charWheel;
+        return characterWheel;
     }
 
-    char add(char character, int increment) {
+    char moveClockWise(char character, int increment) {
         Node node = this.first;
         while (node.data != character) {
             node = node.next;
@@ -41,7 +41,7 @@ class CharWheel {
 
     }
 
-    char subtract(char character, int decrement) {
+    char moveAntiClockwise(char character, int decrement) {
         Node node = this.first;
         while (node.data != character) {
             node = node.next;
@@ -53,7 +53,7 @@ class CharWheel {
         return node.data;
     }
 
-    private class Node {
+    private static class Node {
         final char data;
         Node next;
         Node prev;

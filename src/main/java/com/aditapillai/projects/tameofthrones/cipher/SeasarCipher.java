@@ -2,7 +2,7 @@ package com.aditapillai.projects.tameofthrones.cipher;
 
 
 class SeasarCipher implements Cipher {
-    private static final CharWheel CHAR_WHEEL = CharWheel.getInstance();
+    private static final CharacterWheel CHAR_WHEEL = CharacterWheel.getInstance();
     private final int key;
 
     public SeasarCipher(int key) {
@@ -13,7 +13,7 @@ class SeasarCipher implements Cipher {
     public String encrypt(String data) {
         char[] chars = data.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = CHAR_WHEEL.add(chars[i], key);
+            chars[i] = CHAR_WHEEL.moveClockWise(chars[i], key);
         }
         return new String(chars);
     }
@@ -22,7 +22,7 @@ class SeasarCipher implements Cipher {
     public String decrypt(String data) {
         char[] chars = data.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = CHAR_WHEEL.subtract(chars[i], key);
+            chars[i] = CHAR_WHEEL.moveAntiClockwise(chars[i], key);
         }
         return new String(chars);
     }
