@@ -27,28 +27,6 @@ public class Kingdom {
         this.allies = new LinkedList<>();
     }
 
-    public Ruler getRuler() {
-        return ruler;
-    }
-
-    public void setRuler(@NotNull Ruler ruler) {
-        Objects.requireNonNull(ruler);
-        this.ruler = ruler;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Kingdom kingdom = (Kingdom) o;
-        return emblem.equals(kingdom.emblem);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(emblem);
-    }
-
     public void sendMessage(String to, String body) {
         Message message = new Message(this.name, to, body);
         Message response = this.postService.exchange(message);
@@ -109,5 +87,27 @@ public class Kingdom {
 
     public List<String> getAllies() {
         return Collections.unmodifiableList(this.allies);
+    }
+
+    public Ruler getRuler() {
+        return ruler;
+    }
+
+    public void setRuler(@NotNull Ruler ruler) {
+        Objects.requireNonNull(ruler);
+        this.ruler = ruler;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Kingdom kingdom = (Kingdom) o;
+        return emblem.equals(kingdom.emblem);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(emblem);
     }
 }
