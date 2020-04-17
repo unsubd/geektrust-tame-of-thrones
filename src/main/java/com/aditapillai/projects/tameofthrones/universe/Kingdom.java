@@ -10,14 +10,17 @@ import com.aditapillai.projects.tameofthrones.services.PostService;
 import com.aditapillai.projects.tameofthrones.universe.constants.MessageResponses;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Kingdom {
     public final String name;
     public final String emblem;
-    private final List<String> allies;
+    private final Set<String> allies;
     private Ruler ruler;
     private PostService postService;
 
@@ -26,7 +29,7 @@ public class Kingdom {
         Objects.requireNonNull(name, ErrorMessages.NAME_NOT_NULL_ERROR_MESSAGE);
         this.emblem = emblem;
         this.name = name;
-        this.allies = new LinkedList<>();
+        this.allies = new LinkedHashSet<>();
     }
 
     public void sendMessage(String to, String body) {
@@ -88,8 +91,8 @@ public class Kingdom {
         this.postService = postService;
     }
 
-    public List<String> getAllies() {
-        return Collections.unmodifiableList(this.allies);
+    public Set<String> getAllies() {
+        return new LinkedHashSet<>(this.allies);
     }
 
     public Ruler getRuler() {
