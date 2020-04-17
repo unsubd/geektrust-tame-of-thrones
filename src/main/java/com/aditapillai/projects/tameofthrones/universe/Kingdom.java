@@ -2,6 +2,7 @@ package com.aditapillai.projects.tameofthrones.universe;
 
 import com.aditapillai.projects.tameofthrones.cipher.Cipher;
 import com.aditapillai.projects.tameofthrones.cipher.Ciphers;
+import com.aditapillai.projects.tameofthrones.computation.StringCompareUtils;
 import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.models.Message;
@@ -11,11 +12,8 @@ import com.aditapillai.projects.tameofthrones.universe.constants.MessageResponse
 
 import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Kingdom {
     public final String name;
@@ -68,23 +66,7 @@ public class Kingdom {
     }
 
     private boolean shouldWeAlly(String message) {
-        Map<Character, Long> charCountMap =
-                message.chars()
-                       .mapToObj(character -> (char) character)
-                       .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        boolean result = true;
-
-        for (char character : emblem.toCharArray()) {
-            Long count = charCountMap.getOrDefault(character, 0L);
-            if (count > 0) {
-                charCountMap.put(character, --count);
-            } else {
-                result = false;
-                break;
-            }
-        }
-
-        return result;
+        return StringCompareUtils.containsIndexInsensitive(message, this.emblem);
     }
 
     public void setPostService(PostService postService) {
