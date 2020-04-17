@@ -69,7 +69,8 @@ public class Kingdom {
         return StringCompareUtils.containsIndexInsensitive(message, this.emblem);
     }
 
-    public void setPostService(PostService postService) {
+    public void setPostService(@NotNull PostService postService) {
+        Objects.requireNonNull(ruler);
         this.postService = postService;
     }
 
