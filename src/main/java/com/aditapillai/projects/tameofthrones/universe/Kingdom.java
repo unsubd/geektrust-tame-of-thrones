@@ -22,11 +22,14 @@ public class Kingdom {
     private Ruler ruler;
     private PostService postService;
 
-    public Kingdom(@NotNull String emblem, @NotNull String name) {
+    public Kingdom(@NotNull String emblem, @NotNull String name, @NotNull Ruler ruler) {
         Objects.requireNonNull(emblem, ErrorMessages.EMBLEM_NOT_NULL_ERROR_MESSAGE);
         Objects.requireNonNull(name, ErrorMessages.NAME_NOT_NULL_ERROR_MESSAGE);
+        Objects.requireNonNull(ruler, ErrorMessages.RULER_NOT_NULL_ERROR_MESSAGE);
+
         this.emblem = emblem;
         this.name = name;
+        this.ruler = ruler;
         this.allies = new LinkedHashSet<>();
     }
 
@@ -69,22 +72,13 @@ public class Kingdom {
         return StringCompareUtils.containsIndexInsensitive(message, this.emblem);
     }
 
-    public void setPostService(@NotNull PostService postService) {
-        Objects.requireNonNull(ruler);
+    void setPostService(@NotNull PostService postService) {
+        Objects.requireNonNull(postService);
         this.postService = postService;
     }
 
-    public Set<String> getAllies() {
+    Set<String> getAllies() {
         return new LinkedHashSet<>(this.allies);
-    }
-
-    public Ruler getRuler() {
-        return ruler;
-    }
-
-    public void setRuler(@NotNull Ruler ruler) {
-        Objects.requireNonNull(ruler);
-        this.ruler = ruler;
     }
 
     @Override

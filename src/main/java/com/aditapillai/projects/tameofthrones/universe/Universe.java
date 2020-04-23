@@ -2,48 +2,43 @@ package com.aditapillai.projects.tameofthrones.universe;
 
 import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
-import com.aditapillai.projects.tameofthrones.services.utils.IOUtils;
+import com.aditapillai.projects.tameofthrones.services.PostService;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Universe {
-    private static Universe universe;
     private final Set<Kingdom> kingdoms;
+    private final int minAlliesToBecomeRuler;
+    private final PostService postService;
     private Kingdom rulingKingdom;
 
-    private Universe(@NotNull Set<Kingdom> kingdoms) {
+    public Universe(@NotNull Collection<Kingdom> kingdoms, int minAlliesToBecomeRuler) {
         Objects.requireNonNull(kingdoms);
-        this.kingdoms = kingdoms;
+        this.kingdoms = new HashSet<>(kingdoms);
+        this.postService = new PostService(kingdoms);
+        this.minAlliesToBecomeRuler = minAlliesToBecomeRuler;
+        this.kingdoms.forEach(kingdom -> kingdom.setPostService(postService));
     }
 
-    public static Universe getInstance() {
-        if (universe == null) {
-            synchronized (Universe.class) {
-                Universe.universe = new Universe(new HashSet<>(IOUtils.getAllKingdoms()));
-            }
+    public void playMessages(List<Map.Entry<String, String>> messagesToKingdoms, String from) {
+        Kingdom fromKingdom =
+                this.kingdoms.stream()
+                             .filter(kingdom -> from.equals(kingdom.name))
+                             .findFirst()
+                             .orElseThrow(() -> new RuntimeException(String.format(ErrorMessages.KINGDOM_NOT_FOUND_ERROR_MESSAGE_FORMAT, from)));
+
+        messagesToKingdoms.forEach(messageEntry -> fromKingdom.sendMessage(messageEntry.getKey(), messageEntry.getValue()));
+
+        if (fromKingdom.getAllies()
+                       .size() >= this.minAlliesToBecomeRuler) {
+            this.rulingKingdom = fromKingdom;
         }
-        return universe;
     }
 
-    public Kingdom getRulingKingdom() {
-        return this.rulingKingdom;
+
+    public Optional<Set<String>> getRulingKingdomAllies() {
+        return Optional.ofNullable(this.rulingKingdom)
+                       .map(Kingdom::getAllies);
     }
 
-    public void setRulingKingdom(@NotNull Kingdom kingdom) {
-        Objects.requireNonNull(kingdom, ErrorMessages.RULING_KINGDOM_NOT_NULL_ERROR_MESSAGE);
-        this.rulingKingdom = kingdom;
-    }
-
-    public Set<Kingdom> getKingdoms() {
-        return this.kingdoms;
-    }
-
-    public Kingdom getKingdom(String name) {
-        return this.kingdoms.stream()
-                            .filter(kingdom -> kingdom.name.equals(name))
-                            .findFirst()
-                            .orElseThrow(() -> new RuntimeException(String.format(ErrorMessages.KINGDOM_NOT_FOUND_ERROR_MESSAGE_FORMAT, name)));
-    }
 }

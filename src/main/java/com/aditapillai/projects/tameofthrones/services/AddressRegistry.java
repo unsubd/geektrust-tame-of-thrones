@@ -19,4 +19,13 @@ class AddressRegistry {
         return this.registry.get(address);
     }
 
+    public boolean addKingdom(Kingdom kingdom) {
+        boolean present = !this.registry.containsKey(kingdom.name);
+        boolean added = false;
+        if (!present) {
+            this.registry.put(kingdom.name, kingdom);
+            added = true;
+        }
+        return added;
+    }
 }

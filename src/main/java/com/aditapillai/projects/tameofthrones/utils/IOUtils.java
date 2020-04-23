@@ -1,8 +1,7 @@
-package com.aditapillai.projects.tameofthrones.services.utils;
+package com.aditapillai.projects.tameofthrones.utils;
 
 import com.aditapillai.projects.tameofthrones.models.Gender;
 import com.aditapillai.projects.tameofthrones.models.Ruler;
-import com.aditapillai.projects.tameofthrones.services.PostService;
 import com.aditapillai.projects.tameofthrones.universe.Kingdom;
 
 import java.io.BufferedReader;
@@ -15,9 +14,12 @@ import java.util.stream.Collectors;
 
 public class IOUtils {
 
+    private static final String RULERS_INPUT_PATH = "init/rulers.txt";
+    private static final String KINGDOMS_INPUT_PATH = "init/kingdoms.txt";
+
     public static List<Kingdom> getAllKingdoms() {
         InputStream in = IOUtils.class.getClassLoader()
-                                      .getResourceAsStream("init/rulers.txt");
+                                      .getResourceAsStream(RULERS_INPUT_PATH);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
@@ -31,17 +33,13 @@ public class IOUtils {
                                                    }, HashMap::putAll);
 
         in = IOUtils.class.getClassLoader()
-                          .getResourceAsStream("init/kingdoms.txt");
+                          .getResourceAsStream(KINGDOMS_INPUT_PATH);
 
         reader = new BufferedReader(new InputStreamReader(in));
-        List<Kingdom> kingdoms = reader.lines()
-                                       .map(line -> line.split(","))
-                                       .map(split -> new Kingdom(split[1], split[0]))
-                                       .peek(kingdom -> kingdom.setRuler(kingdomRulerMap.get(kingdom.name)))
-                                       .collect(Collectors.toList());
-        PostService postService = new PostService(kingdoms);
-        kingdoms.forEach(kingdom -> kingdom.setPostService(postService));
-        return kingdoms;
 
+        return reader.lines()
+                     .map(line -> line.split(","))
+                     .map(split -> new Kingdom(split[1], split[0], kingdomRulerMap.get(split[0])))
+                     .collect(Collectors.toList());
     }
 }

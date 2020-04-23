@@ -2,18 +2,19 @@ package com.aditapillai.projects.tameofthrones.cipher;
 
 
 class SeasarCipher implements Cipher {
-    private static final CharacterWheel CHAR_WHEEL = CharacterWheel.getInstance();
+    private final CharacterWheel charWheel;
     private final int key;
 
-    public SeasarCipher(int key) {
+    public SeasarCipher(int key, CharacterWheel characterWheel) {
         this.key = key;
+        this.charWheel = characterWheel;
     }
 
     @Override
     public String encrypt(String data) {
         return data.chars()
                    .mapToObj(character -> (char) character)
-                   .map(character -> CHAR_WHEEL.moveClockWise(character, this.key))
+                   .map(character -> charWheel.moveClockWise(character, this.key))
                    .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                    .toString();
     }
@@ -22,7 +23,7 @@ class SeasarCipher implements Cipher {
     public String decrypt(String data) {
         return data.chars()
                    .mapToObj(character -> (char) character)
-                   .map(character -> CHAR_WHEEL.moveAntiClockwise(character, this.key))
+                   .map(character -> charWheel.moveAntiClockwise(character, this.key))
                    .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                    .toString();
 

@@ -1,39 +1,41 @@
 package com.aditapillai.projects.tameofthrones;
 
-import com.aditapillai.projects.tameofthrones.models.Pair;
-import com.aditapillai.projects.tameofthrones.universe.Kingdom;
 import com.aditapillai.projects.tameofthrones.universe.Universe;
+import com.aditapillai.projects.tameofthrones.utils.IOUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.AbstractMap;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        Universe universe = Universe.getInstance();
-        Kingdom from = universe.getKingdom("SPACE");
 
-        Files.lines(Paths.get(args[0]))
-             .map(line -> line.replaceAll("", "")
-                              .split("\\s"))
-             .map(split -> new Pair<>(split[0], String.join("", Arrays.copyOfRange(split, 1, split.length))))
-             .forEach(pair -> from.sendMessage(pair.FIRST, pair.SECOND));
+        Universe universe = new Universe(IOUtils.getAllKingdoms(), 3);
 
-        if (from.getAllies()
-                .size() < 3) {
-            System.out.println("NONE");
-        } else {
-            StringBuilder result = new StringBuilder(from.name);
-            from.getAllies()
-                .forEach(ally -> result.append(" ")
-                                       .append(ally));
-            System.out.println(result.toString());
-        }
+        List<Map.Entry<String, String>> parsedInput = Files.lines(Paths.get(args[0]))
+                                                           .map(line -> line.replaceAll("", "")
+                                                                            .split("\\s"))
+                                                           .map(split -> new AbstractMap.SimpleImmutableEntry<>(split[0],
+                                                                   String.join("", Arrays.copyOfRange(split, 1, split.length))))
+                                                           .collect(Collectors.toList());
 
-        if (from.getAllies()
-                .size() >= 3) {
-            universe.setRulingKingdom(from);
-        }
+        String from = "SPACE";
+        universe.playMessages(parsedInput, from);
+
+        System.out.println(universe.getRulingKingdomAllies()
+                                   .filter(allies -> !allies.isEmpty())
+                                   .map(allies -> allies.stream()
+                                                        .collect(() -> new StringBuilder(from),
+                                                                (acc, current) -> {
+                                                                    acc.append(" ");
+                                                                    acc.append(current);
+                                                                }, StringBuilder::append))
+                                   .map(StringBuilder::toString)
+                                   .orElse("NONE"));
     }
 }

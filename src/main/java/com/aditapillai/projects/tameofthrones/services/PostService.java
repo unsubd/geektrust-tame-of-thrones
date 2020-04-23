@@ -25,4 +25,8 @@ public class PostService {
         return this.addressRegistry.getKingdomFromAddress(name).emblem;
     }
 
+    public boolean addKingdom(Kingdom kingdom) {
+        return this.addressRegistry.addKingdom(kingdom);
+    }
+
 }
