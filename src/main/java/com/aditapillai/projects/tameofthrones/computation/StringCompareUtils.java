@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class StringCompareUtils {
+public final class StringCompareUtils {
 
     /**
      * Compares whether all the characters in word are present in the text
@@ -18,7 +18,7 @@ public class StringCompareUtils {
      * containsIndexInsensitive("fork", "rofk") -> true
      * containsIndexInsensitive("fork", "roofk") -> false
      */
-    public static boolean containsIndexInsensitive(String text, String word) {
+    public static boolean textContainsAllCharactersOfWord(String text, String word) {
         Map<Character, Long> charCountMap = countMap(text);
         return word.length() == word.chars()
                                     .mapToObj(character -> (char) character)

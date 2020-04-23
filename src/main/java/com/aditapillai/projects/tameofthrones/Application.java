@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class Application {
     public static void main(String[] args) throws IOException {
 
-        Universe universe = new Universe(IOUtils.getAllKingdoms(), 3);
+        Universe universe = new Universe(IOUtils.readInputAndParseKingdoms(), 3);
 
         List<Map.Entry<String, String>> parsedInput = Files.lines(Paths.get(args[0]))
                                                            .map(line -> line.replaceAll("", "")

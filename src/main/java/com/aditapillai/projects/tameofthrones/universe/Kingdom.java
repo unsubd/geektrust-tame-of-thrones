@@ -69,7 +69,7 @@ public class Kingdom {
     }
 
     private boolean shouldWeAlly(String message) {
-        return StringCompareUtils.containsIndexInsensitive(message, this.emblem);
+        return StringCompareUtils.textContainsAllCharactersOfWord(message, this.emblem);
     }
 
     void setPostService(@NotNull PostService postService) {

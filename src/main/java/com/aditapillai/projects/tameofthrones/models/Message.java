@@ -1,6 +1,6 @@
 package com.aditapillai.projects.tameofthrones.models;
 
-public class Message {
+public final class Message {
     public final String from;
     public final String to;
     public final String body;

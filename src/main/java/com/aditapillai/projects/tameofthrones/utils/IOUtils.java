@@ -17,7 +17,7 @@ public class IOUtils {
     private static final String RULERS_INPUT_PATH = "init/rulers.txt";
     private static final String KINGDOMS_INPUT_PATH = "init/kingdoms.txt";
 
-    public static List<Kingdom> getAllKingdoms() {
+    public static List<Kingdom> readInputAndParseKingdoms() {
         InputStream in = IOUtils.class.getClassLoader()
                                       .getResourceAsStream(RULERS_INPUT_PATH);
 
