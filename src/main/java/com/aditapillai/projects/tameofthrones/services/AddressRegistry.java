@@ -4,6 +4,7 @@ import com.aditapillai.projects.tameofthrones.universe.Kingdom;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -15,8 +16,8 @@ class AddressRegistry {
                                 .collect(Collectors.toMap(kingdom -> kingdom.name, Function.identity()));
     }
 
-    Kingdom getKingdomFromName(String address) {
-        return this.registry.get(address);
+    Optional<Kingdom> getKingdomFromName(String address) {
+        return Optional.ofNullable(this.registry.get(address));
     }
 
     public boolean addKingdom(Kingdom kingdom) {

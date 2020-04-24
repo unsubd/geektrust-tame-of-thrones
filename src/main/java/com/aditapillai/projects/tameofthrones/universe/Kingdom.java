@@ -35,7 +35,7 @@ public class Kingdom {
 
     public void sendMessage(String to, String body) {
         Message message = new Message(this.name, to, body);
-        Message response = this.postService.exchange(message);
+        Message response = this.postService.sendMessage(message);
         if (this.hasOtherKingdomAllied(response)) {
             this.allies.add(response.from);
         }
