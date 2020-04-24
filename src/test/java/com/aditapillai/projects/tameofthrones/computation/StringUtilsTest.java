@@ -2,6 +2,7 @@ package com.aditapillai.projects.tameofthrones.computation;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,12 @@ class StringUtilsTest {
         countMap.put('G', 1L);
 
         assertEquals(countMap, StringUtils.countMap("MESSAGE"));
+    }
+
+    @Test
+    public void collectionToString_ListOfStrings_SpaceSeparatedStrings() {
+        String expected = "A B C D";
+        assertEquals(expected, StringUtils.collectionToSpaceSeparatedString(Arrays.asList("A", "B", "C", "D")));
     }
 
 }
