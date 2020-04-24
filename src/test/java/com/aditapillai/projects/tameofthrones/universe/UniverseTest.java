@@ -36,7 +36,7 @@ class UniverseTest {
                                  .encrypt(this.water.emblem);
         Map.Entry<String, String> messageEntry = new AbstractMap.SimpleImmutableEntry<>(this.water.name, messsage);
 
-        this.universe.playMessages(Arrays.asList(messageEntry), this.lava.name);
+        this.universe.executeMessages(Arrays.asList(messageEntry), this.lava.name);
         assertEquals(this.lava.name, this.universe.getRulingKingdom()
                                                   .get());
     }
@@ -47,7 +47,7 @@ class UniverseTest {
                                  .encrypt("INVALID");
         Map.Entry<String, String> messageEntry = new AbstractMap.SimpleImmutableEntry<>(this.water.name, messsage);
 
-        this.universe.playMessages(Arrays.asList(messageEntry), this.lava.name);
+        this.universe.executeMessages(Arrays.asList(messageEntry), this.lava.name);
 
         assertFalse(this.universe.getRulingKingdom()
                                  .isPresent());
@@ -59,7 +59,7 @@ class UniverseTest {
                                  .encrypt(this.water.emblem);
         Map.Entry<String, String> messageEntry = new AbstractMap.SimpleImmutableEntry<>(this.water.name, messsage);
 
-        this.universe.playMessages(Arrays.asList(messageEntry), this.lava.name);
+        this.universe.executeMessages(Arrays.asList(messageEntry), this.lava.name);
         assertTrue(this.universe.getRulingKingdomAllies()
                                 .get()
                                 .contains(this.water.name));

@@ -1,5 +1,6 @@
 package com.aditapillai.projects.tameofthrones.computation;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -36,6 +37,24 @@ public final class StringUtils {
         return text.chars()
                    .mapToObj(character -> (char) character)
                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    /**
+     * Return a space separated representation of a collection of elements
+     *
+     * @param elements all the elements as a collection
+     * @param <T>      Type of the elements
+     * @return space separated representation of the collection
+     */
+    public static <T> String collectionToSpaceSeparatedString(Collection<T> elements) {
+        return elements.stream()
+                       .collect(StringBuilder::new,
+                               (acc, current) -> {
+                                   acc.append(" ");
+                                   acc.append(current);
+                               }, StringBuilder::append)
+                       .toString()
+                       .trim();
     }
 
 

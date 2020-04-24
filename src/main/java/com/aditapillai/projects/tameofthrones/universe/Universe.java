@@ -20,7 +20,7 @@ public class Universe {
         this.kingdoms.forEach(kingdom -> kingdom.setPostService(postService));
     }
 
-    public void playMessages(List<Map.Entry<String, String>> messagesToKingdoms, String from) {
+    public void executeMessages(List<Map.Entry<String, String>> messagesToKingdoms, String from) {
         Kingdom fromKingdom =
                 this.kingdoms.stream()
                              .filter(kingdom -> from.equals(kingdom.name))

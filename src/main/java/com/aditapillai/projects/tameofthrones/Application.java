@@ -1,5 +1,6 @@
 package com.aditapillai.projects.tameofthrones;
 
+import com.aditapillai.projects.tameofthrones.computation.StringUtils;
 import com.aditapillai.projects.tameofthrones.universe.Universe;
 import com.aditapillai.projects.tameofthrones.utils.IOUtils;
 
@@ -25,17 +26,14 @@ public class Application {
                                                            .collect(Collectors.toList());
 
         String from = "SPACE";
-        universe.playMessages(parsedInput, from);
+        universe.executeMessages(parsedInput, from);
 
         System.out.println(universe.getRulingKingdomAllies()
                                    .filter(allies -> !allies.isEmpty())
-                                   .map(allies -> allies.stream()
-                                                        .collect(() -> new StringBuilder(from),
-                                                                (acc, current) -> {
-                                                                    acc.append(" ");
-                                                                    acc.append(current);
-                                                                }, StringBuilder::append))
-                                   .map(StringBuilder::toString)
+                                   .map(StringUtils::collectionToSpaceSeparatedString)
+                                   .map(result -> new StringBuilder(from).append(" ")
+                                                                         .append(result)
+                                                                         .toString())
                                    .orElse("NONE"));
     }
 }
