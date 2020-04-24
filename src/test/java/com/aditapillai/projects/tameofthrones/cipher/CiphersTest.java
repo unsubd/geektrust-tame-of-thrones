@@ -21,7 +21,7 @@ class CiphersTest {
         } catch (NoSuchAlgorithmException exception) {
             result = true;
         }
-        Assertions.assertTrue(true, "Exception not thrown as expected");
+        Assertions.assertTrue(result, "Exception not thrown as expected");
     }
 
 }
