@@ -1,7 +1,7 @@
 package com.aditapillai.projects.tameofthrones.universe;
 
-import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
+import com.aditapillai.projects.tameofthrones.error.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.services.PostService;
 
 import java.util.*;
@@ -20,7 +20,7 @@ public class Universe {
         this.kingdoms.forEach(kingdom -> kingdom.setPostService(postService));
     }
 
-    public void executeMessages(List<Map.Entry<String, String>> messagesToKingdoms, String from) {
+    public void playMessages(List<Map.Entry<String, String>> messagesToKingdoms, String from) {
         Kingdom fromKingdom =
                 this.kingdoms.stream()
                              .filter(kingdom -> from.equals(kingdom.name))

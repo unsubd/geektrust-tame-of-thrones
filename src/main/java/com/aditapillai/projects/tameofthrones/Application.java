@@ -26,7 +26,7 @@ public class Application {
                                                            .collect(Collectors.toList());
 
         String from = "SPACE";
-        universe.executeMessages(parsedInput, from);
+        universe.playMessages(parsedInput, from);
 
         System.out.println(universe.getRulingKingdomAllies()
                                    .filter(allies -> !allies.isEmpty())

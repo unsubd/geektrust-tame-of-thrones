@@ -1,4 +1,4 @@
-package com.aditapillai.projects.tameofthrones.constraints;
+package com.aditapillai.projects.tameofthrones.error;
 
 public interface ErrorMessages {
     String EMBLEM_NOT_NULL_ERROR_MESSAGE = "Emblem for a kingdom cannot be null";
