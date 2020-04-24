@@ -17,12 +17,12 @@ public class PostService {
     }
 
     public Message exchange(Message message) {
-        Kingdom to = this.addressRegistry.getKingdomFromAddress(message.to);
+        Kingdom to = this.addressRegistry.getKingdomFromName(message.to);
         return to.allyRequest(message);
     }
 
     public String getEmblemFor(String name) {
-        return this.addressRegistry.getKingdomFromAddress(name).emblem;
+        return this.addressRegistry.getKingdomFromName(name).emblem;
     }
 
     public boolean addKingdom(Kingdom kingdom) {
