@@ -41,4 +41,9 @@ public class Universe {
                        .map(Kingdom::getAllies);
     }
 
+    public Optional<String> getRulingKingdom() {
+        return Optional.ofNullable(this.rulingKingdom)
+                       .map(kingdom -> kingdom.name);
+    }
+
 }
