@@ -39,12 +39,14 @@ class AddressRegistryTest {
 
     @Test
     public void getKingdomFromName_ValidName_Returned() {
-        assertEquals(this.lava, registry.getKingdomFromName("LAVA"));
+        assertEquals(this.lava, registry.getKingdomFromName("LAVA")
+                                        .get());
     }
 
     @Test
     public void getKingdomFromName_InvalidName_NullReturned() {
-        assertNull(registry.getKingdomFromName("INVALID"));
+        assertFalse(registry.getKingdomFromName("INVALID")
+                            .isPresent());
     }
 
 }
