@@ -2,7 +2,7 @@ package com.aditapillai.projects.tameofthrones.universe;
 
 import com.aditapillai.projects.tameofthrones.cipher.Cipher;
 import com.aditapillai.projects.tameofthrones.cipher.Ciphers;
-import com.aditapillai.projects.tameofthrones.computation.StringCompareUtils;
+import com.aditapillai.projects.tameofthrones.computation.StringUtils;
 import com.aditapillai.projects.tameofthrones.constraints.ErrorMessages;
 import com.aditapillai.projects.tameofthrones.constraints.NotNull;
 import com.aditapillai.projects.tameofthrones.models.Message;
@@ -69,7 +69,7 @@ public class Kingdom {
     }
 
     private boolean shouldWeAlly(String message) {
-        return StringCompareUtils.textContainsAllCharactersOfWord(message, this.emblem);
+        return StringUtils.textContainsAllCharactersOfWord(message, this.emblem);
     }
 
     void setPostService(@NotNull PostService postService) {

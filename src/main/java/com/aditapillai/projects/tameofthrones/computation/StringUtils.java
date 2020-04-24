@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class StringCompareUtils {
+public final class StringUtils {
 
     /**
      * Compares whether all the characters in word are present in the text
