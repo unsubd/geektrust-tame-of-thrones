@@ -48,11 +48,10 @@ public final class StringUtils {
      */
     public static <T> String collectionToSpaceSeparatedString(Collection<T> elements) {
         return elements.stream()
-                       .collect(StringBuilder::new,
-                               (acc, current) -> {
-                                   acc.append(" ");
-                                   acc.append(current);
-                               }, StringBuilder::append)
+                       .collect(StringBuilder::new, (acc, current) -> {
+                           acc.append(" ");
+                           acc.append(current);
+                       }, StringBuilder::append)
                        .toString()
                        .trim();
     }

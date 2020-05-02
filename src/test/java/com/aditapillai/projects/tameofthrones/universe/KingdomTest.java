@@ -72,15 +72,13 @@ class KingdomTest {
 
     @Test
     public void equals_EqualKingdoms_TrueReturned() {
-        Kingdom newKingdom = new Kingdom(this.lava.emblem, "random name", new Ruler("Ruling King",
-                Gender.valueOf('M')));
+        Kingdom newKingdom = new Kingdom(this.lava.emblem, "random name", new Ruler("Ruling King", Gender.valueOf('M')));
         assertTrue(this.lava.equals(newKingdom));
     }
 
     @Test
     public void equals_KingdomsWithDifferentEmblem_FalseReturned() {
-        Kingdom newKingdom = new Kingdom("PEAR", this.lava.name, new Ruler("Ruling King",
-                Gender.valueOf('M')));
+        Kingdom newKingdom = new Kingdom("PEAR", this.lava.name, new Ruler("Ruling King", Gender.valueOf('M')));
         assertFalse(this.lava.equals(newKingdom));
     }
 

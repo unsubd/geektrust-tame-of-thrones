@@ -21,11 +21,10 @@ public class Universe {
     }
 
     public void playMessages(List<Map.Entry<String, String>> messagesToKingdoms, String from) {
-        Kingdom fromKingdom =
-                this.kingdoms.stream()
-                             .filter(kingdom -> from.equals(kingdom.name))
-                             .findFirst()
-                             .orElseThrow(() -> new RuntimeException(String.format(ErrorMessages.KINGDOM_NOT_FOUND_ERROR_MESSAGE_FORMAT, from)));
+        Kingdom fromKingdom = this.kingdoms.stream()
+                                           .filter(kingdom -> from.equals(kingdom.name))
+                                           .findFirst()
+                                           .orElseThrow(() -> new RuntimeException(String.format(ErrorMessages.KINGDOM_NOT_FOUND_ERROR_MESSAGE_FORMAT, from)));
 
         messagesToKingdoms.forEach(messageEntry -> fromKingdom.sendMessage(messageEntry.getKey(), messageEntry.getValue()));
 

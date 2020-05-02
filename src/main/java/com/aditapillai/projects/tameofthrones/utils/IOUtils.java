@@ -26,8 +26,7 @@ public class IOUtils {
         Map<String, Ruler> kingdomRulerMap = reader.lines()
                                                    .map(line -> line.split(","))
                                                    .collect(HashMap::new, (map, lineSplit) -> {
-                                                       Ruler ruler = new Ruler(lineSplit[0],
-                                                               Gender.valueOf(lineSplit[1].charAt(0)));
+                                                       Ruler ruler = new Ruler(lineSplit[0], Gender.valueOf(lineSplit[1].charAt(0)));
                                                        String kingdom = lineSplit[2];
                                                        map.put(kingdom, ruler);
                                                    }, HashMap::putAll);

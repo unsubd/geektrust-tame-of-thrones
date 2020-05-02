@@ -21,8 +21,7 @@ public class Application {
         List<Map.Entry<String, String>> parsedInput = Files.lines(Paths.get(args[0]))
                                                            .map(line -> line.replaceAll("", "")
                                                                             .split("\\s"))
-                                                           .map(split -> new AbstractMap.SimpleImmutableEntry<>(split[0],
-                                                                   String.join("", Arrays.copyOfRange(split, 1, split.length))))
+                                                           .map(split -> new AbstractMap.SimpleImmutableEntry<>(split[0], String.join("", Arrays.copyOfRange(split, 1, split.length))))
                                                            .collect(Collectors.toList());
 
         String from = "SPACE";

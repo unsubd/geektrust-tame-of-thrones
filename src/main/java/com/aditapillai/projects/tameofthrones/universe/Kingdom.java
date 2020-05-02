@@ -57,8 +57,7 @@ public class Kingdom {
         try {
             Cipher cipher = Ciphers.cipher(Ciphers.SEASAR_CIPHER_TYPE, this.emblem.length());
             String decryptedMessage = cipher.decrypt(message.body);
-            String shouldWeAlly = this.shouldWeAlly(decryptedMessage) ? MessageResponses.POSITIVE_RESPONSE:
-                    MessageResponses.NEGATIVE_RESPONSE;
+            String shouldWeAlly = this.shouldWeAlly(decryptedMessage) ? MessageResponses.POSITIVE_RESPONSE : MessageResponses.NEGATIVE_RESPONSE;
             String responseBody = cipher.encrypt(shouldWeAlly);
             response = new Message(this.name, message.from, responseBody);
         } catch (NoSuchAlgorithmException e) {
