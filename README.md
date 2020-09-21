@@ -1,10 +1,7 @@
-# geektrust-tame-of-thrones
-Solution to Tame of Thrones from geektrust
+# geektrust-family
+Solution to the problem statement named Tame of Thrones on https://www.geektrust.in/
 
-To run the app:
+The problem statement is present in [Geektrust_in_tameofthrones_java.pdf](Geektrust_in_tameofthrones_java.pdf)
 
-1. run `mvn clean package` to create a jar.
-
-2. run `java -jar target\geektrust.jar <path_to_input_file>`
-
-3. The result should be printed on the commandline
+My Badges
+![My Badges](golden-crown-badges.png)
